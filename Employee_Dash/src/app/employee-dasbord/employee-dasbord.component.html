@@ -1,0 +1,85 @@
+<style>
+    .form-group {
+      margin-bottom: 1rem;
+    }
+  </style>
+
+  <nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+      <h1>Employee Dashboard</h1>
+      <button href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">ADD Employee</button>
+    </div>
+  </nav>
+
+  <div class="container mt-3">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Employee-Id</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email-Id</th>
+            <th scope="col">Mobile-NO</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of employeeData">
+            <td>{{ row.id }}</td>
+            <td>{{ row.firstName }}</td>
+            <td>{{ row.lastName }}</td>
+            <td>{{ row.email }}</td>
+            <td>{{ row.mobile }}</td>
+            <td>{{ row.salary }}</td>
+            <td>
+              <button class="btn btn-success me-3" (click)="editEmployee(row)" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button>
+              <button class="btn btn-danger" (click)="deleteEmployee(row)">delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Employee Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="m-3" [formGroup]="formValue">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="Enter First Name">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Enter Last Name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email-ID</label>
+            <input type="email" class="form-control" formControlName="email" id="email" placeholder="Enter Email-ID">
+          </div>
+          <div class="form-group">
+            <label for="mobile">Mobile-No</label>
+            <input type="text" class="form-control" formControlName="mobile" id="mobile" placeholder="Enter Mobile number">
+          </div>
+          <div class="form-group">
+            <label for="salary">Salary</label>
+            <input type="text" class="form-control" formControlName="salary" id="salary" placeholder="Enter Salary">
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" (click)="postEmployeeDetails()" class="btn btn-primary">Add</button>
+          <button type="button" (click)="updateEmployeeDetails()" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+
